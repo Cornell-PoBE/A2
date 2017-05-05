@@ -1,0 +1,16 @@
+appdirs==1.4.3
+argh==0.26.2
+click==6.7
+Flask==0.12.1
+Flask-SQLAlchemy==2.2
+itsdangerous==0.24
+Jinja2==2.9.6
+MarkupSafe==1.0
+packaging==16.8
+pathtools==0.1.2
+pyparsing==2.2.0
+PyYAML==3.12
+six==1.10.0
+SQLAlchemy==1.1.9
+watchdog==0.8.3
+Werkzeug==0.12.1
