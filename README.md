@@ -22,8 +22,8 @@ or mobile.  As a result, it involves several tools / technologies / concepts:
 * `MySQL` system configuration and usage
 * `SQL-esque` data-modeling
 * [`ORM`](http://flask-sqlalchemy.pocoo.org/2.1/) usage and data-modeling
-* [`Object Serialization`](http://marshmallow-sqlalchemy.readthedocs.io/en/latest/)
 * `SQL` querying
+* Object serialization
 * Writing an `API` to fit a specification given by front-end
 
 ## Table of Contents
@@ -384,7 +384,23 @@ board element a `done` board element.
 
 ## Suggestions
 
-TODO
+As stated, we require you to use `Flask`, `MySQL`, and `SQLAlchemy`.  Specifically,
+we recommend you use [`Flask-SQLalchemy`](http://flask-sqlalchemy.pocoo.org/2.1/),
+as it is the easiest module to use with `Flask` itself.
+
+Additionally, we recommend you use [`Marshmallow-SQLalchemy`](http://marshmallow-sqlalchemy.readthedocs.io/en/latest/)
+for object serialization (serializing a `SQLAlchemy` model to JSON).
+
+As far as querying goes, `SQLAlchemy`'s [`query`](http://flask-sqlalchemy.pocoo.org/2.1/queries/)
+and filtering options provide reasonably solid support for the type of querying
+you'll be doing with this app, but we also recommend exploring querying data via
+raw `MySQL` queries, as it is the most optimal approach to aggregating the data
+for some of the endpoints you're required to implement.
+
+Any good API establishes constraints on the resources it involves
+(such as uniqueness of certain fields, ensuring non-empty Kanban board titles, etc.)  Any constraints you establish via SQL or your application logic should be documented
+in your submission `readme.txt` (see the [Project Submission](#project-submission) section).
+Such attention to detail will definitely impress us / make your project stand out.
 
 ## Testing Your Code
 
@@ -392,7 +408,96 @@ We recommend testing your code using [`Flask Testing`](http://flask.pocoo.org/do
 
 ## Extensions
 
-TODO
+### 1. Tags
+As you might notice, the front-end features an "+ Add Tag" button on every board element.  
+A tag can belong to several different board elements, and a board element can have many tags.
+If you wish to make the tags portion of your Kanban board work, you can fulfill the below
+spec and then run several POST requests to the following URL to fill your database with
+tags to be added to board elements (I use `httpie` in my examples):
+
+````bash
+http post localhost:5000/kanban/tags?name=exercise
+http post localhost:5000/kanban/tags?name=school
+http post localhost:5000/kanban/tags?name=video+games
+....
+````
+The spec is as follows:
+
+#### Create a Tag
+*Request:* `POST /kanban/tags?name={name}`
+
+*Response:*
+````javascript
+{
+  "success": true,
+  "data": {
+    "tag": {
+      "board_elements": [],
+      "created_at": "2017-05-15T22:50:28+00:00",
+      "id": 4,
+      "name": "exercise",
+      "updated_at": "2017-05-15T22:50:28+00:00"
+    }
+  }
+}
+````
+
+#### Get All Tags
+*Request:* `GET /kanban/tags`
+
+*Response:*
+````javascript
+{
+  "success": true,
+  "data": {
+    "tags": [
+      {
+        "board_elements": [],
+        "created_at": "2017-05-15T22:50:28+00:00",
+        "id": 1,
+        "name": "exercise",
+        "updated_at": "2017-05-15T22:50:28+00:00"
+      },
+      {
+        "board_elements": [
+          4, 5 // just indexes of the board elements that have this tag associated with them
+        ],
+        "created_at": "2017-05-15T22:50:28+00:00",
+        "id": 2,
+        "name": "exercise",
+        "updated_at": "2017-05-15T22:50:28+00:00"
+      }
+    ]
+  }
+}
+````
+
+#### Add Tag to Board Element
+*Request:* `POST /kanban/tags/add?tag_id={tag_id}&board_element_id={board_element_id}`
+
+*Response:*
+````javascript
+{
+  "success": true
+}
+````
+
+#### Remove Tag from Board Element
+*Request:* `DELETE /kanban/tags/add?tag_id={tag_id}&board_element_id={board_element_id}`
+
+*Response:*
+````javascript
+{
+  "success": true
+}
+````
+
+### 2. MySQL Efficiency
+
+You should aim to make your schema (models' setup / relationships) and queries as efficient
+as possible, always shifting constraint-checking and data-aggregation tasks to the database /
+your queries.  Part of our overview of your project will be reading your code, and a clean
+schema and solid querying will keep your code neat and tidy.  
 
 ## Project Submission
 
