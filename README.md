@@ -260,4 +260,78 @@ explore its capabilities.
 
 ## Expected Functionality
 
-TODO 
+#### Create a Board
+**Request:** `POST /kanban/boards?title={board_title}`
+**Response:**
+
+````javascript
+{
+  "success": true,
+  "data": {
+    "board": {
+      "board_elements": [],
+      "created_at": "2017-05-15T22:43:32+00:00",
+      "id": 1,
+      "title": "My Awesome Board",
+      "updated_at": "2017-05-15T22:43:32+00:00"
+    }
+  }
+}
+````
+
+#### Delete a Board
+**Request:** `DELETE /kanban/boards?id={board_id}`
+**Response:**
+
+````javascript
+{
+  "success": true
+}
+````
+
+#### Get Boards
+**Request:** `GET /kanban/boards`
+**Response:**
+
+````javascript
+{
+  "success": true,
+  "data": {
+    "created_at": "2017-05-15T22:43:32+00:00",
+    "id": 1,
+    "title": "My Awesome Board",
+    "updated_at": "2017-05-15T22:43:32+00:00",
+    "todo_count": 1,
+    "inprogress_count": 3,
+    "done_count": 5
+  }
+}
+````
+
+#### Get Board By ID
+
+**Request:** `GET /kanban/boards/{board_id}`
+**Response:**
+
+````javascript
+{
+  "success": true,
+  "data": {
+    "board": {
+      "created_at": "2017-05-15T22:43:32+00:00",
+      "id": 1,
+      "title": "My Awesome Board",
+      "updated_at": "2017-05-15T22:43:32+00:00",
+      "todo": [
+        // todo board_elements, see structure below
+      ],
+      "inprogress": [
+        // inprogress board_elements, see structure below
+      ],
+      "done": [
+        // done board_elements, see structure below
+      ]
+    }
+  }
+}
+````
