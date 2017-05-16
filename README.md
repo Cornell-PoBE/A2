@@ -30,6 +30,7 @@ or mobile.  As a result, it involves several tools / technologies / concepts:
 
 * [Academic Integrity and Collaboration](#academic-integrity-and-collaboration)
 * [System Configuration](#system-configuration)
+* [Database Creation](#database-creation)
 * [Organization](#organization)
 * [Front-end](#front-end)
 * [Expected Functionality](#expected-functionality)
@@ -48,7 +49,7 @@ One of the reasons we chose `Flask` as an initial backend framework for students
 
 ## System Configuration
 
-The following initial [**4** steps](https://github.com/Cornell-PoBE/A1/blob/master/README.md#system-configuration)
+The initial [**4** steps](https://github.com/Cornell-PoBE/A1/blob/master/README.md#system-configuration)
 from `A1` are required in order to interact with this project.  
 
 In addition to the above steps, we expect you to have `MySQL` installed.  
@@ -88,6 +89,94 @@ with a variable you're setting in your `.env` file:
 echo $VARIABLE_NAME
 ````
 
+## Database Creation
+
+`MySQL` will give you an initial, temporary password that you use to sign into the
+console for the first time:
+
+````bash
+mysql -u root -p <temporary-password>
+````
+Once in you can create a user account outside of `root` that you use to manage all your
+local databases:
+
+````bash
+CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
+````
+
+You can provide that user account full access via the following commands:
+
+````bash
+GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
+FLUSH PRIVILEGES;
+````
+
+Once you have this user setup, quit the console and reenter with this user:
+
+````bash
+quit
+mysql -u newuser -p password
+````
+
+Create a database with this user via the following command:
+
+````bash
+CREATE DATABASE pobe_a2_db;
+````
+
+You have successfully created a `MySQL` user account and database!
+
 ## Organization
 
-TODO
+The following describes the initial file-structure of the directory `./src`:
+
+````bash
+.
+├── app
+│   ├── __init__.py
+│   ├── base.py
+│   ├── constants.py
+│   ├── static
+│   │   ├── css
+│   │   │   └── styles.css
+│   │   └── js
+│   │       └── bundle.js
+│   └── templates
+│       ├── 404.html
+│       └── index.html
+├── config.py
+├── manage.py
+├── requirements.txt
+└── run.py
+````
+
+Below consists of brief discussions of each one of the above files:
+
+#### config.py
+
+This file defines configurations for the `Flask` app to run with.  These configurations
+specify things like the number of threads the app runs with, whether `DEBUG` mode is on,
+etc.  In addition, this file grabs environment variables in order to establish the `DB_URL`,
+a.k.a. the `URL` your application uses to interact with the database.  On looking at this file,
+you'll see it accesses the following environment variables: `DB_USERNAME`, `DB_PASSWORD`,
+`DB_HOST`, and `DB_NAME`.  These correspond to your user account name and password that you
+used to create the database in the [`Database Creation`](#database-creation) section,
+the `IP` you're running the database on (should be `localhost` if you're developing locally
+for this project, which you should be), and the name of the database, "pobe_a2_db", or whatever
+you chose to name your database.  
+
+This file articulates the main environment variables you MUST have in order to run the app
+in the first place: all the database-related variables, plus a variable specifying
+which configuration you're running the app in.  We recommend you run the app the
+`DevelopmentConfig` when you work on it, so you can see debugging information and such.  As
+a result, your `.env` file should look like the following, at the minimum:
+
+````bash
+export APP_SETTINGS=config.DevelopmentConfig
+export DB_USERNAME=your_username
+export DB_PASSWORD=your_password
+export DB_HOST=localhost
+export DB_NAME=pobe_a2_db
+````
+
+#### manage.py
