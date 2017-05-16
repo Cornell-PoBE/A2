@@ -261,9 +261,9 @@ explore its capabilities.
 ## Expected Functionality
 
 #### Create a Board
-**Request:** `POST /kanban/boards?title={board_title}`
-**Response:**
+*Request:* `POST /kanban/boards?title={board_title}`
 
+*Response:*
 ````javascript
 {
   "success": true,
@@ -280,9 +280,9 @@ explore its capabilities.
 ````
 
 #### Delete a Board
-**Request:** `DELETE /kanban/boards?id={board_id}`
-**Response:**
+*Request:* `DELETE /kanban/boards?id={board_id}`
 
+*Response:*
 ````javascript
 {
   "success": true
@@ -290,9 +290,9 @@ explore its capabilities.
 ````
 
 #### Get Boards
-**Request:** `GET /kanban/boards`
-**Response:**
+*Request:* `GET /kanban/boards`
 
+*Response:*
 ````javascript
 {
   "success": true,
@@ -310,9 +310,9 @@ explore its capabilities.
 
 #### Get Board By ID
 
-**Request:** `GET /kanban/boards/{board_id}`
-**Response:**
+*Request:* `GET /kanban/boards/{board_id}`
 
+*Response:*
 ````javascript
 {
   "success": true,
