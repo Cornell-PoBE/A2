@@ -36,6 +36,7 @@ or mobile.  As a result, it involves several tools / technologies / concepts:
 * [Expected Functionality](#expected-functionality)
 * [Suggestions](#suggestions)
 * [Testing Your Code](#testing-your-code)
+* [Extensions](#extensions)
 * [Project Submission](#project-submission)
 
 ## Academic Integrity and Collaboration
@@ -309,7 +310,6 @@ explore its capabilities.
 ````
 
 #### Get Board By ID
-
 *Request:* `GET /kanban/boards/{board_id}`
 
 *Response:*
@@ -318,9 +318,9 @@ explore its capabilities.
   "success": true,
   "data": {
     "board": {
-      "created_at": "2017-05-15T22:43:32+00:00",
       "id": 1,
       "title": "My Awesome Board",
+      "created_at": "2017-05-15T22:43:32+00:00",
       "updated_at": "2017-05-15T22:43:32+00:00",
       "todo": [
         // todo board_elements, see structure below
@@ -335,3 +335,71 @@ explore its capabilities.
   }
 }
 ````
+
+#### Create a Board Element
+*Request:* `POST /kanban/board_elements?board_id={board_id}&description={description}&category={todo|inprogress|done}`
+
+*Response:*
+````javascript
+{
+  "success": true,
+  "data": {
+    "board_element": {
+      "id": 1,
+      "board": 2,
+      "category": "todo",
+      "created_at": "2017-05-15T22:43:32+00:00",
+      "updated_at": "2017-05-15T22:43:32+00:00",
+      "description": "A Todo Task, I should get this done!",
+      "tags": [
+        // optional part of the assignment, but an empty array should be returned regardless
+      ]
+    }
+  }
+}
+````
+
+#### Delete a Board Element
+*Request:* `DELETE /kanban/board_elements?id={board_element_id}`
+
+*Response:*
+````javascript
+{
+  "success": true
+}
+````
+
+#### Advance a Board Element
+A.k.a. make a `todo` board element an `inprogress` board element, or an `inprogress`
+board element a `done` board element.
+
+*Request:* `POST /kanban/board_elements/advance?id={board_element_id}`
+
+*Response:*
+````javascript
+{
+  "success": true
+}
+````
+
+## Suggestions
+
+TODO
+
+## Testing Your Code
+
+We recommend testing your code using [`Flask Testing`](http://flask.pocoo.org/docs/0.12/testing/), or `cURL-ing` / `httpie-ing` from the command line.  You can also hand-test via the front-end.
+
+## Extensions
+
+TODO
+
+## Project Submission
+
+You should submit your project along with a `readme.txt` for your citations, project setup information, and any extensions you might have done. This should be at the root of your project (inside the src directory). Run the following to zip your project:
+
+````bash
+zip -r src.zip src -x src/venv\*
+````
+
+You can then submit this file to `CMS`.
