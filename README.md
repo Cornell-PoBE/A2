@@ -34,6 +34,7 @@ or mobile.  As a result, it involves several tools / technologies / concepts:
 * [Organization](#organization)
 * [Front-end](#front-end)
 * [Expected Functionality](#expected-functionality)
+* [Suggestions](#suggestions)
 * [Testing Your Code](#testing-your-code)
 * [Project Submission](#project-submission)
 
@@ -180,3 +181,83 @@ export DB_NAME=pobe_a2_db
 ````
 
 #### manage.py
+
+This file provides you with a command-line interface for performing changes to your
+database as your application evolves.  We expect you to leverage
+[`flask-sqlalchemy`](http://flask-sqlalchemy.pocoo.org/2.1/)
+during this project, meaning you'll be able to describe your database tables as `Python
+classes`.  As you define your `classes`, your actual database should reflect the schema
+you design.  To ensure this happens, you can run "migrations" to change the database.  
+Each migration stores metadata in a `./src/migrations` directory.  The below commands
+enumerate the workflow of the migrating the database using `manage.py`:
+
+````bash
+# Initialize migrations - only needs to be done initially
+python manage.py db init
+# Create a migration
+python manage.py db migrate
+# Apply it to the DB
+python manage.py db upgrade
+````
+
+#### requirements.txt
+
+This file outlines the initial module dependencies of the app. To install
+these, run `pip install -r requirements.txt`. If you pip install a module
+during the duration of your project, be sure to `pip freeze > requirements.txt`
+to add the new module to the requirements.txt file, **or else we won't be
+able to run your project.**
+
+#### run.py
+
+This file is the script used to run your `Flask` app.  You can run your app
+via the following:
+
+````bash
+python run.py
+````
+
+#### app/static
+
+This directory contains the front-end `JavaScript` / `CSS`.  You do not need
+to touch this directory or its contents.
+
+#### app/templates
+
+This directory contains the front-end `HTML`.  You do not need to touch this
+directory or its contents.
+
+#### app/__init__.py
+
+This file bootstraps the app / database.  The only part of this file you should
+be concerned with is the commented-out code in the middle of the file:
+
+````python
+# Import + Register Blueprints
+# Workflow is as follows:
+# from app.blue import blue as blue
+# app.register_blueprint(blue)
+````
+
+What does this mean?  We encourage you to define your app functionality in a
+[`Flask Blueprint`](http://flask.pocoo.org/docs/0.12/blueprints/).  Once you
+write that blueprint, you can import it and register it with the `Flask` application
+instance using the above, commented-out code.  
+
+#### app/constants.py
+
+This is an empty file where you can keep app-wide constants.
+
+#### app/base.py
+
+This file defines an abstract `SQLAlchemy` model.  We expect all your `SQLAlchemy`
+models to extend this base, abstract class.  
+
+## Front-end
+
+[`Here`]() is a link to a publicly-available instance of the front-end, so you can
+explore its capabilities.  
+
+## Expected Functionality
+
+TODO 
