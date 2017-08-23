@@ -298,13 +298,18 @@ explore its capabilities.
 {
   "success": true,
   "data": {
-    "created_at": "2017-05-15T22:43:32+00:00",
-    "id": 1,
-    "title": "My Awesome Board",
-    "updated_at": "2017-05-15T22:43:32+00:00",
-    "todo_count": 1,
-    "inprogress_count": 3,
-    "done_count": 5
+    "boards": [
+      {
+        "created_at": "2017-05-15T22:43:32+00:00",
+        "id": 1,
+        "title": "My Awesome Board",
+        "updated_at": "2017-05-15T22:43:32+00:00",
+        "todo_count": 1,
+        "inprogress_count": 3,
+        "done_count": 5
+      },
+      // More boards ..
+    ]
   }
 }
 ````
