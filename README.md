@@ -38,6 +38,7 @@ or mobile.  As a result, it involves several tools / technologies / concepts:
 * [Testing Your Code](#testing-your-code)
 * [Extensions](#extensions)
 * [Project Submission](#project-submission)
+* [Grading](#grading)
 
 ## Academic Integrity and Collaboration
 
@@ -411,6 +412,8 @@ Such attention to detail will definitely impress us / make your project stand ou
 
 We recommend testing your code using [`Flask Testing`](http://flask.pocoo.org/docs/0.12/testing/), or `cURL-ing` / `httpie-ing` from the command line.  You can also hand-test via the front-end.
 
+To make your lives easier we have provided you our test cases in the test.py file that you may leverage to test your endpoints. This file uses the unittest module extensively and can be extended if you wish to further develop your test suite to handle your own edge cases.
+
 ## Extensions
 
 ### 1. Tags
@@ -513,3 +516,6 @@ zip -r src.zip src -x src/venv\*
 ````
 
 You can then submit this file to `CMS`.
+
+## Grading
+You will be graded based on how many test cases you pass. Our test cases are provided for you in the test.py file.
