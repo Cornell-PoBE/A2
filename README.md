@@ -257,8 +257,8 @@ models to extend this base, abstract class.
 
 ## Front-end
 
-[`Here`]() is a link to a publicly-available instance of the front-end, so you can
-explore its capabilities.  
+[`Here`](http://34.215.197.79/boards) is a link to a publicly-available instance of the entire application, so you can
+explore its capabilities and how your backend system should look with a hook-up front end. 
 
 ## Expected Functionality
 
