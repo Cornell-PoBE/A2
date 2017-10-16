@@ -351,7 +351,7 @@ explore its capabilities.
   "data": {
     "board_element": {
       "id": 1,
-      "board": 2,
+      "board_id": 2,
       "category": "todo",
       "created_at": "2017-05-15T22:43:32+00:00",
       "updated_at": "2017-05-15T22:43:32+00:00",
