@@ -13,8 +13,8 @@ db = SQLAlchemy(app)
 
 # Import + Register Blueprints
 # Workflow is as follows:
-# from app.blue import blue as blue
-# app.register_blueprint(blue)
+from app.kanban import kanban as kanban
+app.register_blueprint(kanban)
 
 # Default functionality of rendering index.html
 def render_page():
