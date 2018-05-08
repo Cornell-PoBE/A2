@@ -366,7 +366,7 @@ explore its capabilities and how your backend system should look with a hook-up 
 ````
 
 #### Delete a Board Element
-*Request:* `DELETE /kanban/board_elements?id={board_element_id}`
+*Request:* `DELETE /kanban/board_elements?board_element_id={element_id}`
 
 *Response:*
 ````javascript
